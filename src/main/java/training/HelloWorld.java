@@ -9,5 +9,10 @@ public class HelloWorld {
         String nam = scr.nextLine();
         System.out.println("Hello "+nam);
 
+        System.out.println("What's your year of birth?");
+        int year = scr.nextInt();
+        System.out.println("Year of birth: " + year); // 2
+
+        System.out.println(2020 - year); // 3
     }
 }

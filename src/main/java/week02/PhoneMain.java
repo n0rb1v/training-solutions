@@ -19,8 +19,8 @@ public class PhoneMain {
         i= scanner.nextInt();
         Phone phone2=new Phone(x,i);
 
-        System.out.println(phone1.getType()+" "+phone1.getMem());;
-        System.out.println(phone2.getType()+" "+phone2.getMem());;
+        System.out.println(phone1.getType()+" "+phone1.getMem());
+        System.out.println(phone2.getType()+" "+phone2.getMem());
 
 
     }

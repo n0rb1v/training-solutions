@@ -4,7 +4,7 @@ public class StoreMain {
     public static void main(String[] args) {
 
         Store store1 = new Store("eger");
-        Store store2 = new Store("bill");
+        Store store2 = new Store("attributes/bill");
 
         store1.store(18);
         store2.store(25);

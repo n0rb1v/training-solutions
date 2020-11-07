@@ -34,6 +34,8 @@ public class Controller {
         System.out.println("| 6. Kereses nevtoredek alapjan |");
         System.out.println("| 7. Kereses terulet alapjan    |");
         System.out.println("---------------------------------");
+        System.out.println("Menupont:");
+
     }
 
     public void runMenu() {
@@ -42,38 +44,41 @@ public class Controller {
         String nev = "";
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Menu:");
         menu = Integer.parseInt(scanner.nextLine());
 
-        if (menu == 1) {
-            office.printNames();
-        }
-        if (menu == 2) {
-            office.printNamesReverse();
-        }
-        if (menu == 3) {
-            office.printEvenNames();
-        }
-        if (menu == 4) {
-            office.printAreas();
-        }
-        if (menu == 5) {
-            System.out.println("Nev:");
-            nev = scanner.nextLine();
-            office.printMeetingRoomsWithName(nev);
-        }
-        if (menu == 6) {
-            System.out.println("Nevtoredek:");
-            nev = scanner.nextLine();
-            office.printMeetingRoomsContains(nev);
-        }
-        if (menu == 7) {
-            System.out.println("Meret:");
-            terulet = Integer.parseInt(scanner.nextLine());
-            office.printAreasLargerThan(terulet);
+        switch (menu) {
+            case 1:
+                office.printNames();
+                break;
+            case 2:
+                office.printNames();
+                break;
+            case 3:
+                office.printEvenNames();
+                break;
+            case 4:
+                office.printAreas();
+                break;
+            case 5:
+                System.out.println("Nev:");
+                nev = scanner.nextLine();
+                office.printMeetingRoomsWithName(nev);
+                break;
+            case 6:
+                System.out.println("Nevtoredek:");
+                nev = scanner.nextLine();
+                office.printMeetingRoomsContains(nev);
+                break;
+            case 7:
+                System.out.println("Meret:");
+                terulet = Integer.parseInt(scanner.nextLine());
+                office.printAreasLargerThan(terulet);
+                break;
         }
 
     }
+
+
 
 
     public static void main(String[] args) {

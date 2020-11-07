@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Controller {
     private Office office;
+    boolean exit=false;
 
     public void readOffice() {
         office = new Office();
@@ -25,15 +26,12 @@ public class Controller {
     }
 
     public void printMenu() {
-        System.out.println("---------------------------------");
-        System.out.println("| 1. Targyalok sorrendben       |");
-        System.out.println("| 2. Targyalok visz. sorrendben |");
-        System.out.println("| 3. Minden masodik targyalo    |");
-        System.out.println("| 4. Teruletek                  |");
-        System.out.println("| 5. Kereses nev alapjan        |");
-        System.out.println("| 6. Kereses nevtoredek alapjan |");
-        System.out.println("| 7. Kereses terulet alapjan    |");
-        System.out.println("---------------------------------");
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println("| 1. Targyalok sorrendben       | 5. Kereses nev alapjan        |");
+        System.out.println("| 2. Targyalok visz. sorrendben | 6. Kereses nevtoredek alapjan |");
+        System.out.println("| 3. Minden masodik targyalo    | 7. Kereses terulet alapjan    |");
+        System.out.println("| 4. Teruletek                  | 8. Kilepes                    |");
+        System.out.println("-----------------------------------------------------------------");
         System.out.println("Menupont:");
 
     }
@@ -51,7 +49,7 @@ public class Controller {
                 office.printNames();
                 break;
             case 2:
-                office.printNames();
+                office.printNamesReverse();
                 break;
             case 3:
                 office.printEvenNames();
@@ -74,20 +72,21 @@ public class Controller {
                 terulet = Integer.parseInt(scanner.nextLine());
                 office.printAreasLargerThan(terulet);
                 break;
+            case 8:
+                exit=true;
         }
 
     }
-
-
-
 
     public static void main(String[] args) {
         Controller controller = new Controller();
 
         controller.readOffice();
-        controller.printMenu();
-        controller.runMenu();
+        while (!controller.exit){
+            controller.printMenu();
+            controller.runMenu();
 
+        }
     }
 
 }

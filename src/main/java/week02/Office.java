@@ -17,7 +17,7 @@ public class Office {
     }
 
     public void printNamesReverse() {
-        for (int i = meetingRooms.size() - 1; i > 0; i--) {
+        for (int i = meetingRooms.size()-1; i >= 0; i--) {
             System.out.println(meetingRooms.get(i).getName());
         }
     }

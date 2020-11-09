@@ -26,14 +26,14 @@ public class Controller {
     }
 
     public void printMenu() {
-        System.out.println("-----------------------------------------------------------------");
-        System.out.println("| 1. Targyalok sorrendben       | 5. Kereses nev alapjan        |");
-        System.out.println("| 2. Targyalok visz. sorrendben | 6. Kereses nevtoredek alapjan |");
-        System.out.println("| 3. Minden masodik targyalo    | 7. Kereses terulet alapjan    |");
-        System.out.println("| 4. Teruletek                  | 8. Kilepes                    |");
-        System.out.println("-----------------------------------------------------------------");
-        System.out.println("Menupont:");
-
+        System.out.println(
+        "-----------------------------------------------------------------\n"+
+        "| 1. Targyalok sorrendben       | 5. Kereses nev alapjan        |\n"+
+        "| 2. Targyalok visz. sorrendben | 6. Kereses nevtoredek alapjan |\n"+
+        "| 3. Minden masodik targyalo    | 7. Kereses terulet alapjan    |\n"+
+        "| 4. Teruletek                  | 8. Kilepes                    |\n"+
+        "-----------------------------------------------------------------\n"+
+        "Menupont:");
     }
 
     public void runMenu() {

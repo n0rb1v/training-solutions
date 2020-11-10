@@ -1,8 +1,8 @@
 package week02;
 
 public class Position {
-    String name;
-    int bonus;
+    private String name;
+    private int bonus;
 
     public Position(String name, int bonus) {
         this.name = name;

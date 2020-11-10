@@ -17,7 +17,7 @@ public class PosiitiionMain {
 
 
         for (Position pos: posList){
-            if (pos.bonus > 150_000){
+            if (pos.getBonus() > 150_000){
                 System.out.println(pos);
             }
         }

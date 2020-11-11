@@ -21,6 +21,9 @@ public class PosiitiionMain {
                 System.out.println(pos);
             }
         }
+        int a = 10;
+        double b = (15 - a) / 2 * (double) 3;
+        System.out.println(b);
 
     }
 }

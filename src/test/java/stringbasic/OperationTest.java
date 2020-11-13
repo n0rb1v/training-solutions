@@ -12,8 +12,13 @@ public class OperationTest {
 
         assertEquals(60, op.getResult());
 
+    }
+    @Test
+    void Test2() {
+        Operation op = new Operation("  25  +   35 ");
 
-
+        assertEquals(60, op.getResult());
 
     }
+
 }

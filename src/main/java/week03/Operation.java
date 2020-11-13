@@ -6,7 +6,7 @@ public class Operation {
 
     public  Operation(String s) {
         leftOp = Integer.parseInt(s.substring(0,s.indexOf("+")));
-        rightOp = Integer.parseInt(s.substring(s.indexOf("+"),s.length()));
+        rightOp = Integer.parseInt(s.substring(s.indexOf("+")+1,s.length()));
     }
 
     public int getResult(){

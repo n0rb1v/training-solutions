@@ -8,27 +8,28 @@ public class GuessTheNumber {
     public static void main(String[] args) {
         final Random rnd = new Random();
 
-        int number = rnd.nextInt(99)+1;
+        int number = rnd.nextInt(100) + 1;
         int guess = 0;
         Scanner scanner = new Scanner(System.in);
 
         int i = 0;
-        while (i<6) {
+        while (i < 6 && guess != number) {
 
             System.out.println("Szam?");
             guess = Integer.parseInt(scanner.nextLine());
-            if (guess < number){
+            if (guess < number) {
                 System.out.println("kisebb");
             }
-            if (guess > number){
+            if (guess > number) {
                 System.out.println("nagyobb");
             }
-            if (guess == number){
-                System.out.println("Kitalatad "+number );
+            if (guess == number) {
+                System.out.println("Kitalatad " + number);
             }
             i++;
         }
-        if (i == 6){
+        if (i == 6) {
             System.out.println("Elfogyott a lehetoseg");
+        }
     }
 }

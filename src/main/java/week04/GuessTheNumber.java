@@ -12,8 +12,9 @@ public class GuessTheNumber {
         int guess = 0;
         Scanner scanner = new Scanner(System.in);
 
+        int i = 0;
+        while (i<6) {
 
-        for (int i = 0; i < 6; i++) {
             System.out.println("Szam?");
             guess = Integer.parseInt(scanner.nextLine());
             if (guess < number){
@@ -25,10 +26,9 @@ public class GuessTheNumber {
             if (guess == number){
                 System.out.println("Kitalatad "+number );
             }
-            if (i == 6){
-                System.out.println("Elfogyott a lehetoseg");
-            }
+            i++;
         }
-
+        if (i == 6){
+            System.out.println("Elfogyott a lehetoseg");
     }
 }

@@ -25,9 +25,10 @@ public class GuessTheNumber {
             if (guess == number){
                 System.out.println("Kitalatad "+number );
             }
-
+            if (i == 6){
+                System.out.println("Elfogyott a lehetoseg");
+            }
         }
-        System.out.println("Elfogyott a lehetoseg");
 
     }
 }

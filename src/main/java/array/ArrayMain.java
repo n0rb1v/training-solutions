@@ -17,5 +17,6 @@ public class ArrayMain {
             tomb[i] = ((i % 2) == 0) ? false : true;
             System.out.println(tomb[i]);
         }
+
     }
 }

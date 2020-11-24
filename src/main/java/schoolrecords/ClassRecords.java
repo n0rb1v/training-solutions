@@ -10,6 +10,9 @@ public class ClassRecords {
     private Random rnd;
     private List<Student> students = new ArrayList<>();
 
+    public ClassRecords(String fourth_grade_a, Random random) {
+    }
+
     public boolean addStudent(Student stu) {
         return true;
     }
@@ -56,4 +59,7 @@ public class ClassRecords {
         return new Student("a");
     }
 
+    public List<StudyResultByName> listStudyResults() {
+    return null;
+    }
 }

@@ -14,7 +14,18 @@ public class ClassRecords {
     }
 
     public boolean addStudent(Student stu) {
-        return true;
+        boolean succ = false;
+        if (students.add(stu)){
+            succ=true;
+        }
+        return succ;
+    }
+    public boolean removeStudent(Student stu) {
+        boolean succ = false;
+        if (students.remove(stu)){
+            succ=true;
+        }
+        return succ;
     }
 
     public double calculateClassAverage() {
@@ -51,9 +62,6 @@ public class ClassRecords {
 //    public List<StudyResultByName> listStudyResults(){
 //    }
 
-    public boolean removeStudent(Student stu) {
-        return true;
-    }
 
     public Student repetition() {
         return new Student("a");

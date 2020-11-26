@@ -28,6 +28,6 @@ public class Mark {
 
     @Override
     public String toString() {
-        return markType.getDescription() + "(" + markType.getValue() + ")";
+        return subject.getSubjectName()+": "+ markType.getDescription() + "(" + markType.getValue() + ")";
     }
 }

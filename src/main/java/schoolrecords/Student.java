@@ -16,17 +16,17 @@ public class Student {
 
     public double calculateAverage() {
         int i = 0;
-        int sum = 0;
+        double sum = 0;
         for (Mark item : marks) {
             sum += item.getMarkType().getValue();
             i++;
         }
-        return Math.round((double) sum / i * 100.0) / 100.0;
+        return Math.round(sum / i * 100.0) / 100.0;
     }
 
     public double calculateSubjectAverage(Subject sub) {
         int i = 0;
-        int sum = 0;
+        double sum = 0;
         for (Mark item : marks) {
             String s1= item.getSubject().getSubjectName();
             String s2= sub.getSubjectName();
@@ -35,7 +35,7 @@ public class Student {
                 i++;
             }
         }
-        return Math.round((double) sum / i * 100.0) / 100.0;
+        return Math.round(sum / i * 100.0) / 100.0;
     }
 
     public boolean equals(Object o) {
@@ -62,6 +62,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return name + " marks: " + marks.get(0).getSubject().getSubjectName() + ": " + marks.get(0);
+        return name +" marks: "+ marks;
     }
 }

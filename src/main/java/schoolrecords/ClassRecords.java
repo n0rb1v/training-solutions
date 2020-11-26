@@ -10,39 +10,59 @@ public class ClassRecords {
     private Random rnd;
     private List<Student> students = new ArrayList<>();
 
-    public ClassRecords(String fourth_grade_a, Random random) {
+    public ClassRecords(String className, Random rnd) {
+        this.className = className;
+        this.rnd = rnd;
     }
 
     public boolean addStudent(Student stu) {
         boolean succ = false;
-        if (students.add(stu)){
-            succ=true;
+        if (!students.contains(stu.getName())) {
+        students.add(stu);
+        succ = true;
         }
         return succ;
     }
+
     public boolean removeStudent(Student stu) {
         boolean succ = false;
-        if (students.remove(stu)){
-            succ=true;
+        if (!students.contains(stu.getName())) {
+        } else {
+            students.remove(stu);
+            succ = true;
         }
         return succ;
     }
 
     public double calculateClassAverage() {
-        return 0;
+        int i = 0;
+        double sum = 0;
+        for (Student item : students) {
+            sum += item.calculateAverage();
+            i++;
+        }
+        return Math.round(sum / i * 100.0) / 100.0;
     }
 
     public double calculateClassAverageBySubject(Subject sub) {
-        return 0;
+        int i = 0;
+        double sum = 0;
+        for (Student item : students) {
+            double diff = item.calculateSubjectAverage(sub);
+            if (diff != 0.0) {
+                sum += diff;
+                i++;
+            }
+        }
+        return Math.round(sum / i * 100.0) / 100.0;
+
     }
 
-    public void ClassRecords(String s, Random rnd) {
-
-    }
 
     public Student findStudentByName(String s) {
         return new Student("a");
     }
+
 
     public String getClassName() {
         return className;
@@ -68,6 +88,6 @@ public class ClassRecords {
     }
 
     public List<StudyResultByName> listStudyResults() {
-    return null;
+        return null;
     }
 }

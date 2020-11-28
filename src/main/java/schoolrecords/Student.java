@@ -8,7 +8,7 @@ public class Student {
     private String name;
 
     public Student(String name) {
-        if (name.isEmpty()){
+        if (name.isEmpty()) {
             throw new IllegalArgumentException("Student name must not be empty!");
         }
         this.name = name;
@@ -28,8 +28,8 @@ public class Student {
         int i = 0;
         double sum = 0;
         for (Mark item : marks) {
-            String s1= item.getSubject().getSubjectName();
-            String s2= sub.getSubjectName();
+            String s1 = item.getSubject().getSubjectName();
+            String s2 = sub.getSubjectName();
             if (s1.equals(s2)) {
                 sum += item.getMarkType().getValue();
                 i++;
@@ -47,21 +47,37 @@ public class Student {
     }
 
     public void grading(Mark mark) {
-        if (mark==null){
+        if (mark == null) {
             throw new NullPointerException("Mark must not be null!");
         }
         marks.add(mark);
     }
 
     private boolean isEmpty(String s) {
-        if ("".equals(s)){
+        if ("".equals(s)) {
             return true;
         }
         return false;
     }
 
+    public boolean isMarkEmpty() {
+        if (marks.size() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public List<Mark> getMarks() {
+        return marks;
+    }
+
     @Override
     public String toString() {
-        return name +" marks: "+ marks;
+        String s = "";
+        for (Mark item : marks) {
+            s += item.getSubject().getSubjectName() + ": ";
+        }
+        s += marks.toString().substring(1, marks.toString().length() - 1);
+        return name + " marks: " + s;
     }
 }

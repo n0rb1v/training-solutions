@@ -2,6 +2,7 @@ package schoolrecords;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -16,28 +17,36 @@ public class ClassRecords {
     }
 
     public boolean addStudent(Student stu) {
-        boolean succ = false;
-        if (!students.contains(stu.getName())) {
-        students.add(stu);
-        succ = true;
+        for (Student item : students) {
+            if (item.getName().equals(stu.getName())) {
+                return false;
+            }
         }
-        return succ;
+        students.add(stu);
+        return true;
     }
 
     public boolean removeStudent(Student stu) {
-        boolean succ = false;
-        if (!students.contains(stu.getName())) {
-        } else {
-            students.remove(stu);
-            succ = true;
+        for (Student item : students) {
+            if (item.getName().equals(stu.getName())) {
+                students.remove(stu);
+                return true;
+            }
         }
-        return succ;
+        return false;
     }
 
     public double calculateClassAverage() {
+        if (students.size()==0){
+            throw new ArithmeticException("No student in the class, average calculation aborted!");
+        }
+
         int i = 0;
         double sum = 0;
         for (Student item : students) {
+            if (item.isMarkEmpty()){
+                throw new ArithmeticException("No marks present, average calculation aborted!");
+            }
             sum += item.calculateAverage();
             i++;
         }
@@ -45,6 +54,9 @@ public class ClassRecords {
     }
 
     public double calculateClassAverageBySubject(Subject sub) {
+        if (students.size()==0){
+            throw new ArithmeticException("No student in the class, average calculation aborted!");
+        }
         int i = 0;
         double sum = 0;
         for (Student item : students) {
@@ -60,7 +72,22 @@ public class ClassRecords {
 
 
     public Student findStudentByName(String s) {
-        return new Student("a");
+        if (s.isEmpty()){
+            throw new IllegalArgumentException("Student name must not be empty!");
+        }
+        if (students.size()==0){
+            throw new IllegalStateException("No students to search!");
+        }
+        Student found = null;
+        for (Student item : students) {
+            if (item.getName().equals(s)) {
+                found = item;
+            }
+        }
+        if (found==null){
+            throw new IllegalArgumentException("Student by this name cannot be found! "+s);
+        }
+        return found;
     }
 
 
@@ -68,26 +95,37 @@ public class ClassRecords {
         return className;
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
     private boolean isEmpty(String s) {
-        if ("".equals(s)) {
+        if ("".equals(s)||s==null) {
             return true;
         }
         return false;
     }
 
     public String listStudentNames() {
-        return "";
+        String stu = "";
+        for (Student item : students) {
+            stu += item.getName() + ", ";
+        }
+        return stu.substring(0, stu.length() - 2);
     }
 
-//    public List<StudyResultByName> listStudyResults(){
-//    }
-
-
     public Student repetition() {
-        return new Student("a");
+        if (students.size()==0){
+            throw new IllegalStateException("No students to select for repetition!");
+        }
+        return students.get(rnd.nextInt(students.size()));
     }
 
     public List<StudyResultByName> listStudyResults() {
-        return null;
+        List<StudyResultByName> stures = new ArrayList<>();
+        for (Student item: students){
+            stures.add(new StudyResultByName(item.getName(), item.calculateAverage()));
+        }
+        return stures;
     }
 }

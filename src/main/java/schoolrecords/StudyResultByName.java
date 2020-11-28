@@ -1,11 +1,24 @@
 package schoolrecords;
 
 public class StudyResultByName {
+    String studentName;
+    double StudyAverage;
+
+    public StudyResultByName(String studentName, double studyAverage) {
+        this.studentName = studentName;
+        this.StudyAverage = studyAverage;
+    }
+
     public String getStudentName() {
-        return null;
+        return studentName;
     }
 
     public double getStudyAverage() {
-        return 0;
+        return StudyAverage;
+    }
+
+    @Override
+    public String toString() {
+        return studentName + ":"+ StudyAverage;
     }
 }

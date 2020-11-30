@@ -27,8 +27,8 @@ public class ClassRecords {
     }
 
     public boolean removeStudent(Student stu) {
-        for (Student item : students) {
-            if (item.getName().equals(stu.getName())) {
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getName().equals(stu.getName())){
                 students.remove(stu);
                 return true;
             }

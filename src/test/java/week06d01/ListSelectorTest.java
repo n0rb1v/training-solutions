@@ -17,14 +17,14 @@ public class ListSelectorTest {
         List<String> test = Arrays.asList("abc","bela","aladar","geza","ALADDIN","Jani","arra");
         ListSelector ls = new ListSelector();
 
-        assertEquals("[abcaladarALADDINarra]", ls.filterList(test));
+        assertEquals("[abc,aladar,ALADDIN,arra]", ls.filterList(test));
     }
     @Test
     public void nullList() {
         List<String> test = new ArrayList<>();
         ListSelector ls = new ListSelector();
 
-        assertEquals("[]", ls.filterList(test));
+        assertEquals("", ls.filterList(test));
     }
     @Test
     public void incorrectParameterShouldThrowException() throws IllegalArgumentException {

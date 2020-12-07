@@ -9,11 +9,11 @@ public class BodyMass {
         this.magassag = magassag;
     }
 
-    public double getTomeg() {
+    public double getWeight() {
         return tomeg;
     }
 
-    public double getMagassag() {
+    public double getHeight() {
         return magassag;
     }
 

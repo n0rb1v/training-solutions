@@ -14,6 +14,11 @@ public class MathAlgorithmsTest {
     }
     @Test
     public void test2() {
+        assertEquals(false, MathAlgorithms.isPrime(1));
+
+    }
+    @Test
+    public void test3() {
         assertEquals(true, MathAlgorithms.isPrime(13));
 
     }

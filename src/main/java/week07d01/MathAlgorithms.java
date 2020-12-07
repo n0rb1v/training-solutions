@@ -5,6 +5,9 @@ public class MathAlgorithms {
         if (x<1){
             throw new IllegalArgumentException("rossz parameter");
         }
+        if (x==1){
+            return false;
+        }
         for (int i = 2; i < x; i++) {
             if ( x % (double)i == 0.0) {
                 return false;

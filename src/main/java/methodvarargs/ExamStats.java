@@ -8,8 +8,8 @@ public class ExamStats {
     }
 
     public int getNumberOfTopGrades(int limitInPercent, int... results) {
-        if (results.length == 0) {
-            throw new IllegalArgumentException("Rossz parameter");
+        if (results == null || results.length == 0) {
+            throw new IllegalArgumentException("Number of results must not be empty!");
         }
         int sum = 0;
         for (int item : results) {
@@ -21,8 +21,8 @@ public class ExamStats {
     }
 
     public boolean hasAnyFailed(int limitInPercent, int... results) {
-        if (results.length == 0) {
-            throw new IllegalArgumentException("Rossz parameter");
+        if (results == null || results.length == 0) {
+            throw new IllegalArgumentException("Number of results must not be empty!");
         }
         for (int item : results) {
             if (item < limitInPercent) {

@@ -16,7 +16,7 @@ public class Budget {
         }
         List<Item> items2 = new ArrayList<>();
         for (Item mitem: itemList){
-            if (mitem.getMonth()==month){
+            if (mitem.getDate().getMonthValue()==month){
                 items2.add(mitem);
             }
         }

@@ -12,6 +12,7 @@ public class NumberListTest {
     public void test1() {
         assertEquals(true, NumberList.isIncreasing(Arrays.asList(1, 2, 3, 3, 3, 5)));
         assertEquals(false, NumberList.isIncreasing(Arrays.asList(1, 2, 3, 2, 3, 5)));
+        assertEquals(true, NumberList.isIncreasing(Arrays.asList(-1, 2, 3, 3, 3, 5)));
 
     }
 }

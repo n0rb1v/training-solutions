@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class VehicleTest {
     @Test
     void test1() {
-        Vehicle v1 = new Car();
-        Vehicle v2 = new Truck();
-        Vehicle v3 = new Motorcycle();
+        Vehicle v1 = new Car(5);
+        Vehicle v2 = new Truck(8,TransmissionType.MANUAL);
+        Vehicle v3 = new Motorcycle(6);
 
         assertEquals(5,v1.getNumberOfGears());
         assertEquals(TransmissionType.AUTOMATIC,v1.getTransmissionType());

@@ -11,6 +11,7 @@ public class MathAlgorithmsTest {
     @Test
     void test1() {
         assertEquals(2,MathAlgorithms.greatestCommonDivisor(6,8));
+        assertEquals(8,MathAlgorithms.greatestCommonDivisor(16,8));
 
     }
 }

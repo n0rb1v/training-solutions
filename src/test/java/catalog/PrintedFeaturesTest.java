@@ -1,7 +1,7 @@
-package week08d05;
+package catalog;
 
+import catalog.PrintedFeatures;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 import java.util.Arrays;
 

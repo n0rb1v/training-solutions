@@ -1,5 +1,6 @@
-package week08d05;
+package catalog;
 
+import catalog.AudioFeatures;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

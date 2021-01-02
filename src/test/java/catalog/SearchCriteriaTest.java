@@ -1,6 +1,6 @@
-package week08d05;
+package catalog;
 
-import org.junit.jupiter.api.Assertions;
+import catalog.SearchCriteria;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

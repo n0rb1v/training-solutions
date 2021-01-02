@@ -1,10 +1,10 @@
-package week08d05;
+package catalog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Catalog {
-    private List<CatalogItem> catalogItems = new ArrayList<>();
+    List<CatalogItem> catalogItems = new ArrayList<>();
 
     public void addItem(CatalogItem catalogItem) {
         catalogItems.add(catalogItem);
@@ -22,8 +22,12 @@ public class Catalog {
         return 1;
     }
 
-    public int fullLength() {
+    public int getFullLength() {
         return 1;
+    }
+
+    public List<CatalogItem> findByCriteria(SearchCriteria searchCriteria){
+        return null;
     }
 
     public List<CatalogItem> getAudioLibraryItems() {

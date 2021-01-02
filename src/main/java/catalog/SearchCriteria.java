@@ -1,4 +1,4 @@
-package week08d05;
+package catalog;
 
 public class SearchCriteria {
     public String contributor;
@@ -11,7 +11,6 @@ public class SearchCriteria {
         if (s2 == null || s2.isBlank()) {
             throw new IllegalArgumentException("Contributor miss");
         }
-
         return new SearchCriteria(s2, s1);
     }
 

@@ -1,4 +1,4 @@
-package week08d05;
+package catalog;
 
 import java.util.List;
 

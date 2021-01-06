@@ -5,23 +5,26 @@ import java.util.Collections;
 import java.util.List;
 
 public class MaxTravel {
-    //    public int getMaxIndex(List<Integer> stops) {
-//        Collections.sort(stops);
-//        int[] sum = 0;
-//        int[] number = 0;
-//        for (int i = 1; i < stops.size(); i++) {
-//            if (stops.get(i) > stops.get(i - 1)) {
-//                number[i] = i;
-//            } else {
-//                sum[i]++;
-//            }
-//        }
-    public int getMaxIndex(List<Integer> stops) {
+    public int getMaxIndex1(List<Integer> stops) {
+        Collections.sort(stops);
+        int sum = 0;
+        int number = 0;
+        for (int i = 1; i < stops.size(); i++) {
+            if (stops.get(i) > stops.get(i - 1)) {
+                number = i;
+            } else {
+                sum++;
+            }
+        }
+        return number;
+    }
+
+    public int getMaxIndex2(List<Integer> stations) {
         int[] passengerSum = new int[30];
         int maxIndex = 0;
         int maxValue = 0;
 
-        for (int item : stops) {
+        for (int item : stations) {
             passengerSum[item]++;
         }
         for (int i = 0; i < passengerSum.length; i++) {

@@ -1,5 +1,6 @@
 package week09d03;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SantaClaus {
@@ -16,6 +17,6 @@ public class SantaClaus {
     }
 
     public List<Person> getPersons() {
-        return persons;
+        return new ArrayList<>(persons);
     }
 }

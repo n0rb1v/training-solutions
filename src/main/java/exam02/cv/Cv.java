@@ -34,7 +34,6 @@ public class Cv {
                 return item.getLevel();
             }
         }
-        return 0;
-        //throw new SkillNotFoundException("Not found");
+        throw new IllegalArgumentException("Not found");
     }
 }

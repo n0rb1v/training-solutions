@@ -11,20 +11,35 @@ public class Track {
     }
 
     public Coordinate findMaximumCoordinate() {
-        Coordinate max = new Coordinate(0,0);
-        int index = 0;
-        for (int i = 0; i < trackPoints.size(); i++) {
-            if (max < trackPoints.get(i).getCoordinate()) {
-                max = trackPoints.get(i).getCoordinate();
-                index = i;
+        double maxLat = 0;
+        double maxLong = 0;
+        for (TrackPoint item : trackPoints) {
+            if (maxLat < item.getCoordinate().getLatitude()) {
+                maxLat = item.getCoordinate().getLatitude();
             }
-
         }
-        return trackPoints.get(index).getCoordinate();
+        for (TrackPoint item : trackPoints) {
+            if (maxLong < item.getCoordinate().getLongitude()) {
+                maxLong = item.getCoordinate().getLongitude();
+            }
+        }
+        return new Coordinate(maxLat, maxLong);
     }
 
     public Coordinate findMinimumCoordinate() {
-        return null;
+        double minLat = 0;
+        double minLong = 0;
+        for (TrackPoint item : trackPoints) {
+            if (minLat > item.getCoordinate().getLatitude()) {
+                minLat = item.getCoordinate().getLatitude();
+            }
+        }
+        for (TrackPoint item : trackPoints) {
+            if (minLong > item.getCoordinate().getLongitude()) {
+                minLong = item.getCoordinate().getLongitude();
+            }
+        }
+        return new Coordinate(minLat, minLong);
     }
 
     public double getDistance() {
@@ -56,7 +71,11 @@ public class Track {
     }
 
     public double getRectangleArea() {
-        return 0;
+        double lat = 0;
+        double lng = 0;
+        lat = findMaximumCoordinate().getLatitude() - findMinimumCoordinate().getLatitude();
+        lng = findMaximumCoordinate().getLongitude() - findMinimumCoordinate().getLongitude();
+        return lat * lng;
     }
 
 

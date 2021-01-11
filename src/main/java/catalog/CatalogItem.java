@@ -19,8 +19,10 @@ public class CatalogItem {
     public List<String> getContributors() {
         List<String> result = new ArrayList<>();
         for (Feature item : features) {
-            String s = item.getContributors().toString();
-            result.add(s.substring(1,s.length()-1));
+            List<String> s = item.getContributors();
+            for (String cont : s) {
+                result.add(cont);
+            }
         }
         return result;
     }
@@ -34,20 +36,20 @@ public class CatalogItem {
     }
 
     public boolean hasAudioFeature() {
-        boolean b=false;
+        boolean b = false;
         for (Feature item : features) {
             if (item instanceof AudioFeatures) {
-                b=true;
+                b = true;
             }
         }
         return b;
     }
 
     public boolean hasPrintedFeature() {
-        boolean b=false;
+        boolean b = false;
         for (Feature item : features) {
             if (item instanceof PrintedFeatures) {
-                b=true;
+                b = true;
             }
         }
         return b;

@@ -12,9 +12,9 @@ class CourierTest {
     private List<Ride> rides = new ArrayList<>();
 
 
-    public Courier(List<Ride> rides) {
-        this.rides = rides;
-    }
+//    public Courier(List<Ride> rides) {
+//        this.rides = rides;
+//    }
 
     public List<Ride> getRides() {
         return rides;

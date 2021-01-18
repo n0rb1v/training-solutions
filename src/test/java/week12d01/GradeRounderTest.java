@@ -16,6 +16,7 @@ class GradeRounderTest {
         assertEquals(test2[1], new GradeRounder().roundGrades(test)[1]);
         assertEquals(test2[2], new GradeRounder().roundGrades(test)[2]);
         assertEquals(test2[3], new GradeRounder().roundGrades(test)[3]);
+        assertEquals(test2[4], new GradeRounder().roundGrades(test)[4]);
 
     }
 }

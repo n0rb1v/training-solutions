@@ -1,4 +1,4 @@
-package week02;
+package week02d05;
 
 public class Phone {
     String type;

@@ -1,6 +1,4 @@
-package week03;
-
-import java.util.Scanner;
+package week03d05;
 
 public class PhoneParse {
     public Phone parse(String s){

@@ -1,7 +1,7 @@
 package stringbasic;
 
 import org.junit.jupiter.api.Test;
-import week03.Operation;
+import week03d04.Operation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

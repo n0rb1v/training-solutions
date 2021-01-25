@@ -1,6 +1,4 @@
-package week02;
-
-import attributes.bill.Item;
+package week02d05;
 
 import java.util.ArrayList;
 import java.util.List;

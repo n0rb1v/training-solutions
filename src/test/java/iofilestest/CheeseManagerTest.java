@@ -1,8 +1,7 @@
 package iofilestest;
 
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -11,13 +10,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CheeseManagerTest {
-    @Rule
-    public TemporaryFolder tempFolder = new TemporaryFolder();
+    @TempDir
+    public Path tempDir;
 
 
     @Test
     public void Test1() throws IOException {
-        Path file = tempFolder.newFile("cheese.txt").toPath();
+        Path file = tempDir.resolve("cheese.csv");
         System.out.println(file);
         List<Cheese> cheeseList = List.of(
                 new Cheese("trapista", 555),
@@ -27,7 +26,8 @@ class CheeseManagerTest {
                 new Cheese("marvany", 1250)
         );
         new CheeseManager().saveToFile(file,cheeseList);
-
+        assertEquals("medve", new CheeseManager().findCheese(file,"medve").getName());
+        assertEquals(335, new CheeseManager().findCheese(file,"medve").getLaktoz());
 
     }
 }

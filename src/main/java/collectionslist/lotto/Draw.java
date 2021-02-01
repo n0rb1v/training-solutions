@@ -4,13 +4,13 @@ import java.util.*;
 
 public class Draw {
     public Set<Integer> drawNumbers(int draw, int max) {
-        if (max <= draw) {
+        if (max <= draw){
             throw new IllegalArgumentException("drawCount must be less then " + max + "!");
         }
-        List<Integer> tmp = new LinkedList<>(createPool(max));
+        LinkedList<Integer> tmp = new LinkedList<>(createPool(max));
         Set<Integer> result = new TreeSet<>();
         for (int i = 0; i < draw; i++) {
-            result.add(tmp.get(i));
+            result.add(tmp.poll());
         }
         return result;
     }

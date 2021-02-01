@@ -1,9 +1,9 @@
-package week02d05;
+package week02d04;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PosiitiionMain {
+public class PositionMain {
 
     public static void main(String[] args) {
         String[] nevek = {"aa","bb","cc","dd"};

@@ -1,5 +1,7 @@
 package week02d05;
 
+import week02d05.MeetingRoom;
+
 import java.util.ArrayList;
 import java.util.List;
 

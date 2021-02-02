@@ -10,7 +10,7 @@ class IndexerTest {
 
     @Test
     void index() {
-        assertEquals("{A=[Abraham], L=[Lujza], M=[Magdolna], O=[Odon]}",
-                new Indexer().index(Arrays.asList("Odon", "Lujza", "Abraham", "Magdolna")).toString());
+        assertEquals("{A=[Abraham], L=[Lujza, Lajos], M=[Magdolna], O=[Odon]}",
+                new Indexer().index(Arrays.asList("Odon", "Lujza", "Lajos", "Abraham", "Magdolna")).toString());
     }
 }

@@ -21,17 +21,21 @@ public class Hachiko {
             String line;
             while ((line = bf.readLine()) != null) {
                 for (String item : s) {
-                    if (line.contains(item)) {
-                        if (!result.containsKey(item)) {
-                            result.put(item, 0);
-                        }
-                        result.put(item, result.get(item) + 1);
-                    }
+                    putItemIf(result, line, item);
                 }
             }
         } catch (IOException e) {
             throw new IllegalStateException("file error", e);
         }
         return result;
+    }
+
+    private void putItemIf(Map<String, Integer> result, String line, String item) {
+        if (line.contains(item)) {
+            if (!result.containsKey(item)) {
+                result.put(item, 0);
+            }
+            result.put(item, result.get(item) + 1);
+        }
     }
 }

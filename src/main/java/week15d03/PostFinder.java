@@ -11,14 +11,13 @@ public class PostFinder {
         this.postList = postList;
     }
 
-    public List<Post> findPostsFor(String user){
+    public List<Post> findPostsFor(String user) {
         List<Post> result = new ArrayList<>();
-        for (Post item: postList){
-            if (item.getOwner().equals(user)){
-                if (item.getPublishedAt().isBefore(LocalDate.now())){
-                    if (!item.getTitle().isEmpty() && !item.getContent().isEmpty())
-                        result.add(item);
-                }
+        for (Post item : postList) {
+            if (!item.getTitle().isEmpty() && !item.getContent().isEmpty()
+                    && item.getOwner().equals(user)
+                    && item.getPublishedAt().isBefore(LocalDate.now())) {
+                result.add(item);
             }
         }
         return result;

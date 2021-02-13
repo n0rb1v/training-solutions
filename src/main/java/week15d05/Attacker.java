@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Attacker {
-    private List<Battle> battleList = new ArrayList<>();
-
     public Map<String, Integer> loadFile() {
         try (BufferedReader bf = Files.newBufferedReader(Path.of("src/main/resources/battles.txt"))) {
             String line = bf.readLine();
@@ -36,12 +34,6 @@ public class Attacker {
             throw new IllegalStateException("file error", e);
         }
     }
-
-
-    public List<Battle> getBattleList() {
-        return battleList;
-    }
-
 
     public static void main(String[] args) {
         Attacker a = new Attacker();

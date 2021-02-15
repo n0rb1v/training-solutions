@@ -7,12 +7,12 @@ public class Histogram {
 
     public String createHistogram(BufferedReader reader) throws IOException {
         String line;
-        String result = null;
+        String result = "";
         while ((line= reader.readLine())!=null){
             for (int i = 0; i < Integer.parseInt(line); i++) {
-                result.concat("*");
+                result += "*";
             }
-            result.concat("\n");
+            result +="\n";
         }
         return result;
     }

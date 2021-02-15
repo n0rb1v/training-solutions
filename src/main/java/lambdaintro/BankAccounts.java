@@ -22,7 +22,7 @@ public class BankAccounts {
         result.sort(new Comparator<BankAccount>() {
             @Override
             public int compare(BankAccount o1, BankAccount o2) {
-                return Math.abs((int)o1.getBalance()) - Math.abs((int) o2.getBalance());
+                return Math.abs((int) o1.getBalance()) - Math.abs((int) o2.getBalance());
             }
         });
         return result;
@@ -61,18 +61,23 @@ public class BankAccounts {
 //                }
 //            }
 //        });
-        Collections.sort(result, Comparator.nullsFirst(new Comparator<BankAccount>() {
-            @Override
-            public int compare(BankAccount o1, BankAccount o2) {
-                return o1.getNameOfOwner().compareTo(o2.getNameOfOwner());
-            }
-        }.thenComparing(new Comparator<BankAccount>() {
-            @Override
-            public int compare(BankAccount o1, BankAccount o2) {
-                return o1.getAccountNumber().compareTo(o2.getAccountNumber());
-            }
-        })));
-        return result;
+//        Collections.sort(result, Comparator.nullsFirst(((Comparator<BankAccount>) (o1, o2) -> {
+//            return o1.getNameOfOwner().compareTo(o2.getNameOfOwner());
+//        }).thenComparing(new Comparator<BankAccount>() {
+//            @Override
+//            public int compare(BankAccount o1, BankAccount o2) {
+//                return o1.getAccountNumber().compareTo(o2.getAccountNumber());
+//            }
+//        })));
+//        return result;
 
+        List<BankAccount> ordered = new ArrayList<>(bankAccounts);
+        Collator collator = Collator.getInstance(new Locale("hu", "HU"));
+        ordered.sort(
+                Comparator.comparing(BankAccount::getNameOfOwner,
+                        Comparator.nullsFirst(collator))
+                        .thenComparing(BankAccount::getAccountNumber));
+        return ordered;
     }
 }
+

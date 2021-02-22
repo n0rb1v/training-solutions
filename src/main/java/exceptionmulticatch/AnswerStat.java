@@ -1,10 +1,11 @@
 package exceptionmulticatch;
 
+
 import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
 
-
 public class AnswerStat {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(AnswerStat.class);
     private BinaryStringConverter converter;
 

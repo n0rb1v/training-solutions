@@ -31,7 +31,7 @@ public class ActivityDao {
                      conn.prepareStatement("select * from activitytracker where id =?")) {
             stmt.setLong(1, id);
             List<Activity> x = getStatement(stmt);
-            if (x.size() == 1){
+            if (x.size() == 1) {
                 return x.get(0);
             }
             throw new IllegalStateException("not found");
@@ -40,16 +40,13 @@ public class ActivityDao {
         }
     }
 
-    public Activity findActivityByType(ActivityType type) {
+    public List<Activity> findActivityByType(ActivityType type) {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt =
                      conn.prepareStatement("select * from activitytracker where activity_type=?")) {
             stmt.setString(1, type.toString());
             List<Activity> x = getStatement(stmt);
-            if (x.size() == 1){
-                return x.get(0);
-            }
-            throw new IllegalStateException("not found");
+            return x;
         } catch (SQLException e) {
             throw new IllegalStateException("select error", e);
         }
@@ -67,7 +64,7 @@ public class ActivityDao {
 
     private List<Activity> getStatement(PreparedStatement stmt) throws SQLException {
         List<Activity> result = new ArrayList<>();
-        try (ResultSet rs = stmt.executeQuery()){
+        try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Activity a = new Activity(
                         rs.getLong(1),

@@ -3,12 +3,12 @@ package activitytracker;
 import java.time.LocalDateTime;
 
 public class Activity {
-    private int id;
+    private long id;
     private LocalDateTime startTime;
     private String desc;
     private ActivityType type;
 
-    public Activity(int id, LocalDateTime startTime, String desc, ActivityType type) {
+    public Activity(long id, LocalDateTime startTime, String desc, ActivityType type) {
         this.id = id;
         this.startTime = startTime;
         this.desc = desc;

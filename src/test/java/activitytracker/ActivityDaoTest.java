@@ -33,11 +33,12 @@ class ActivityDaoTest {
     @Test
     void saveActivityTest() {
         ad = new ActivityDao(dataSource);
-        Activity act = new Activity(1, LocalDateTime.of(2012, 5, 22, 17, 55),
+        Activity act = new Activity( LocalDateTime.of(2012, 5, 22, 17, 55),
                 "probablbla", ActivityType.BIKING);
         ad.saveActivity(act);
 
         assertEquals(4, ad.listActivities().size());
+        assertEquals(4, act.getId());
     }
 
     @Test
@@ -61,7 +62,7 @@ class ActivityDaoTest {
     @Test
     void listDateBeforeTest() {
         ad = new ActivityDao(dataSource);
-        assertEquals(2, ad.selectActivityBeforeDate(LocalDate.of(2021,01,01)).size());
+        assertEquals(2, ad.selectActivityBeforeDate(LocalDate.of(2020,11,13)).size());
     }
 
 }

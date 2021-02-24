@@ -8,11 +8,26 @@ public class Activity {
     private String desc;
     private ActivityType type;
 
+    public Activity(LocalDateTime startTime, String desc, ActivityType type) {
+        this.startTime = startTime;
+        this.desc = desc;
+        this.type = type;
+    }
+
     public Activity(long id, LocalDateTime startTime, String desc, ActivityType type) {
         this.id = id;
         this.startTime = startTime;
         this.desc = desc;
         this.type = type;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public long setId(long id) {
+        this.id = id;
+        return id;
     }
 
     public LocalDateTime getStartTime() {

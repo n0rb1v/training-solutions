@@ -13,16 +13,27 @@ public class ActivityDao {
         this.dataSource = dataSource;
     }
 
-    public void saveActivity(Activity a) {
+    public long saveActivity(Activity a) {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt =
-                     conn.prepareStatement("insert into activitytracker(start_time,activity_desc,activity_type) values (?,?,?)")) {
+                     conn.prepareStatement("insert into activitytracker(start_time,activity_desc,activity_type) values (?,?,?)",
+                             Statement.RETURN_GENERATED_KEYS)) {
             stmt.setTimestamp(1, Timestamp.valueOf(a.getStartTime()));
             stmt.setString(2, a.getDesc());
             stmt.setString(3, a.getType().toString());
             stmt.executeUpdate();
+            return a.setId(getKey(stmt));
         } catch (SQLException e) {
             throw new IllegalStateException("insert error", e);
+        }
+    }
+
+    private long getKey(PreparedStatement stmt) throws SQLException {
+        try (ResultSet rs = stmt.getGeneratedKeys()){
+            if (rs.next()){
+                return rs.getLong(1);
+            }
+            throw new IllegalStateException("id error");
         }
     }
 

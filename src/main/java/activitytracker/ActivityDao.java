@@ -2,6 +2,7 @@ package activitytracker;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,17 @@ public class ActivityDao {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt =
                      conn.prepareStatement("select * from activitytracker")) {
+            return getStatement(stmt);
+        } catch (SQLException e) {
+            throw new IllegalStateException("select* error");
+        }
+    }
+
+    public List<Activity> selectActivityBeforeDate(LocalDate date) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt =
+                     conn.prepareStatement("select * from activitytracker where start_time <?")) {
+            stmt.setString(1, date.toString());
             return getStatement(stmt);
         } catch (SQLException e) {
             throw new IllegalStateException("select* error");

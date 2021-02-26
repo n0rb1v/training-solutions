@@ -42,9 +42,25 @@ class ActivityDaoTest {
     }
 
     @Test
+    void saveTrackedActivityTest() {
+        ad = new ActivityDao(dataSource);
+        Activity act = new Activity( LocalDateTime.of(2016, 5, 22, 17, 55),
+                "probablbla", ActivityType.BIKING);
+        act.addTrackPoint(new TrackPoint(LocalDate.of(2017,5,6),56.3,66.8));
+        act.addTrackPoint(new TrackPoint(LocalDate.of(2017,5,6),56.7,67.1));
+        act.addTrackPoint(new TrackPoint(LocalDate.of(2017,5,6),56.9,97.5));
+
+        ad.saveActivity(act);
+
+        assertEquals(4, ad.listActivities().size());
+        assertEquals(4, act.getId());
+    }
+
+    @Test
     void findActivityByIdTest() {
         ad = new ActivityDao(dataSource);
-        assertEquals("bgadttyuif", ad.findActivityById(1).getDesc());
+        assertEquals("bghjghggyuif", ad.findActivityById(2).getDesc());
+        assertEquals(3, ad.findActivityById(2).getTrackPoints().size());
     }
 
     @Test

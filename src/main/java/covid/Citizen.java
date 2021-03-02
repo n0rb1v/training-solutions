@@ -1,7 +1,7 @@
 package covid;
 
 public class Citizen {
-    private int id;
+    private long id;
     private String name;
     private String postcode;
     private int age;
@@ -60,11 +60,11 @@ public class Citizen {
                 '}';
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

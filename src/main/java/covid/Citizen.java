@@ -1,5 +1,9 @@
 package covid;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Citizen {
     private long id;
     private String name;
@@ -7,6 +11,8 @@ public class Citizen {
     private int age;
     private String email;
     private String TAJnumber;
+    private int vaccNumber;
+    private LocalDateTime vaccLast;
 
     public Citizen(String name, String postcode, int age, String email, String TAJnumber) {
         this.name = isEmpty(name);
@@ -14,6 +20,35 @@ public class Citizen {
         this.age = isValidAge(age);
         this.email = isValidEmail(email);
         this.TAJnumber = isValidTAJ(TAJnumber);
+    }
+
+    public int getVaccNumber() {
+        return vaccNumber;
+    }
+
+    public LocalDateTime getVaccLast() {
+        return vaccLast;
+    }
+
+    public void setVaccLast(LocalDateTime vaccLast) {
+        this.vaccLast = vaccLast;
+    }
+
+    public void incVaccNumber() {
+        this.vaccNumber++;
+    }
+
+    public Citizen(long id, String name, String postcode, int age, String email, String TAJnumber, int vaccNumber, Timestamp vaccLast) {
+        this.id = id;
+        this.name = name;
+        this.postcode = postcode;
+        this.age = age;
+        this.email = email;
+        this.TAJnumber = TAJnumber;
+        this.vaccNumber = vaccNumber;
+        if (vaccLast != null) {
+            this.vaccLast = vaccLast.toLocalDateTime();
+        }
     }
 
     private String isEmpty(String s) {

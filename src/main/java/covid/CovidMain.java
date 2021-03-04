@@ -3,16 +3,21 @@ package covid;
 import org.flywaydb.core.Flyway;
 import org.mariadb.jdbc.MariaDbDataSource;
 
+import java.nio.file.Path;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class CovidMain {
+    Scanner scanner = new Scanner(System.in);
 
     public void runMenu(Covid c, CovidDao cd) {
         int menu = 0;
-        Scanner scanner = new Scanner(System.in);
-        Map<String,String> postMap = cd.mapPostcodes();
+        Map<String, String> postMap = cd.mapPostcodes();
 
         while (!(menu == 7)) {
             System.out.println("" +
@@ -32,10 +37,37 @@ public class CovidMain {
                     cd.saveCitizen(register(postMap));
                     break;
                 case 2:
+                    c.addFromFile(filePath());
+                    cd.saveCitizenList(c.getCitizens());
                     break;
                 case 3:
+                    System.out.println("Iranyito szam:");
+                    String post = scanner.nextLine();
+                    List<Citizen> generated = cd.listGenerate(post);
+                    c.saveFile(filePath(), generated);
+                    System.out.println(generated);
                     break;
                 case 4:
+                    System.out.println("TAJ szam:");
+                    String taj = scanner.nextLine();
+                    System.out.println("Datum:");
+                    String datum = scanner.nextLine();
+                    LocalDateTime lastdate = null;
+                    if (datum.isEmpty()) {
+                        lastdate = LocalDateTime.now();
+                    } else {
+                        lastdate = LocalDateTime.parse(datum);
+                    }
+                    System.out.println("Oltas tipus:");
+                    String oltas = scanner.nextLine();
+                    Citizen citizen = cd.selectCitizen(taj);
+                    if (isValidTAJ(taj) & citizen != null) {
+                        citizen.incVaccNumber();
+                        citizen.setVaccLast(lastdate);
+                        cd.updateCitizen(citizen);
+                    } else {
+                        System.out.println("hibas vagy nem regisztralt taj");
+                    }
                     break;
                 case 5:
                     break;
@@ -46,8 +78,15 @@ public class CovidMain {
             }
         }
     }
-    public Citizen register(Map<String, String> postMap){
-        Scanner scanner = new Scanner(System.in);
+
+    private Path filePath() {
+        System.out.println("File:");
+        String file = scanner.nextLine();
+        return Path.of("src/main/resources/" + file);
+
+    }
+
+    private Citizen register(Map<String, String> postMap) {
         System.out.println("Teljes név:");
         String name = scanner.nextLine();
         System.out.println("Irányítószám:");
@@ -63,10 +102,22 @@ public class CovidMain {
         Citizen c = null;
         try {
             c = new Citizen(name, post, age, email, taj);
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("hibás adatok: " + e);
         }
         return c;
+    }
+
+    private boolean isValidTAJ(String s) {
+        int sum = 0;
+        for (int i = 0; i < 8; i += 2) {
+            sum += (Integer.parseInt(String.valueOf(s.charAt(i))) * 3);
+            sum += (Integer.parseInt(String.valueOf(s.charAt(i + 1))) * 7);
+        }
+        if (!(sum % 10 == Integer.parseInt(String.valueOf(s.charAt(8))))) {
+            return false;
+        }
+        return true;
     }
 
 
@@ -90,6 +141,6 @@ public class CovidMain {
         CovidMain cm = new CovidMain();
         Covid covid = new Covid();
         CovidDao covidDao = new CovidDao(dataSource);
-        cm.runMenu(covid,covidDao);
+        cm.runMenu(covid, covidDao);
     }
 }

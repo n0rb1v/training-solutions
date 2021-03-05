@@ -6,7 +6,7 @@ import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.sql.SQLException;
 
-class CovidDaoTest {
+class CovidFileDaoTest {
     MariaDbDataSource dataSource;
     CovidDao cd;
 

@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Covid {
+public class CovidFile {
     private List<Citizen> citizens = new ArrayList<>();
 
     public void addCitizen(Citizen c) {

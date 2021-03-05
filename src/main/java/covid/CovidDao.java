@@ -1,8 +1,5 @@
 package covid;
 
-import activitytracker.Activity;
-import activitytracker.ActivityType;
-
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,25 +27,18 @@ public class CovidDao {
             stmt.setString(4, c.getEmail());
             stmt.setString(5, c.getTAJnumber());
             stmt.executeUpdate();
-            c.setId(getKey(stmt));
+            c.setId(saveCitizenStatement(stmt));
             return c;
         } catch (SQLException e) {
             throw new IllegalStateException("insert error", e);
         }
     }
-
-    public void updateCitizen(Citizen c) {
-        try (
-                Connection conn = dataSource.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(
-                        "UPDATE `citizens` SET `num_of_vacc`=?, `last_vacc`=? WHERE  `id`=?")
-        ) {
-            stmt.setInt(1, c.getVaccNumber());
-            stmt.setString(2, c.getVaccLast().toString());
-            stmt.setLong(3,c.getId());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new IllegalStateException("update error", e);
+    private long saveCitizenStatement(PreparedStatement stmt) throws SQLException {
+        try (ResultSet rs = stmt.getGeneratedKeys()) {
+            if (rs.next()) {
+                return rs.getLong(1);
+            }
+            throw new IllegalStateException("id error");
         }
     }
 
@@ -58,23 +48,79 @@ public class CovidDao {
         }
     }
 
-    private long getKey(PreparedStatement stmt) throws SQLException {
-        try (ResultSet rs = stmt.getGeneratedKeys()) {
-            if (rs.next()) {
-                return rs.getLong(1);
+    public void updateCitizen(Citizen c, Vaccination vc) {
+        try (Connection conn = dataSource.getConnection()) {
+            conn.setAutoCommit(false);
+            try (PreparedStatement stmt1 = conn.prepareStatement("UPDATE citizens SET `num_of_vacc`=?, `last_vacc`=? WHERE  id=?");
+                 PreparedStatement stmt2 = conn.prepareStatement("insert into vaccinations(citizen_id,vacc_date,status,note,vacc_type) values (?,?,?,?,?)")) {
+                stmt1.setInt(1, c.getVaccNumber());
+                stmt1.setString(2, c.getVaccLast().toString());
+                stmt1.setLong(3, c.getId());
+                stmt1.executeUpdate();
+                stmt2.setLong(1, vc.getCitizen_id());
+                stmt2.setString(2, vc.getVaccination_date().toString());
+                stmt2.setString(3, vc.getStatus());
+                stmt2.setString(4, vc.getNote());
+                stmt2.setString(5, vc.getVacc_type());
+                stmt2.executeUpdate();
+                conn.commit();
+            }catch (SQLException e){
+                conn.rollback();
+                throw new IllegalStateException("update error", e);
             }
-            throw new IllegalStateException("id error");
+        } catch (SQLException e) {
+            throw new IllegalStateException("connection error", e);
         }
     }
 
+    public List<Citizen> listGenerate(String post) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt =
+                     conn.prepareStatement(
+                             "SELECT * FROM citizens WHERE c_zip = ? AND (num_of_vacc = 0 OR num_of_vacc = 1) ORDER BY c_age DESC LIMIT 16")) {
+            stmt.setString(1, post);
+            return getCitizenStatement(stmt);
+        } catch (SQLException e) {
+            throw new IllegalStateException("select* error");
+        }
+    }
 
-    public Citizen selectCitizen(String taj) {
+    public Citizen selectCitizenTaj(String taj) {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt =
                      conn.prepareStatement(
                              "SELECT * FROM citizens WHERE c_taj = ?")) {
             stmt.setString(1, taj);
-            List<Citizen> x = getStatementList(stmt);
+            List<Citizen> x = getCitizenStatement(stmt);
+            if (x.size() == 1) {
+                return x.get(0);
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("select* error");
+        }
+    }
+    public List<Citizen> selectCitizenZip(String zip) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt =
+                     conn.prepareStatement(
+                             "SELECT * FROM citizens WHERE c_zip = ?")) {
+            stmt.setString(1, zip);
+            List<Citizen> x = getCitizenStatement(stmt);
+                return x;
+        } catch (SQLException e) {
+            throw new IllegalStateException("select* error");
+        }
+    }
+
+    public Vaccination selectVaccination(Long id) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt =
+                     conn.prepareStatement(
+                             "SELECT * FROM vaccinations WHERE citizen_id = ?")) {
+            stmt.setLong(1, id);
+            List<Vaccination> x = getVaccStatement(stmt);
             if (x.size() == 1) {
                 return x.get(0);
             } else {
@@ -85,19 +131,7 @@ public class CovidDao {
         }
     }
 
-    public List<Citizen> listGenerate(String post) {
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt =
-                     conn.prepareStatement(
-                             "SELECT * FROM citizens WHERE c_zip = ? AND (num_of_vacc = 0 OR num_of_vacc = 1) ORDER BY c_age DESC LIMIT 16")) {
-            stmt.setString(1, post);
-            return getStatementList(stmt);
-        } catch (SQLException e) {
-            throw new IllegalStateException("select* error");
-        }
-    }
-
-    private List<Citizen> getStatementList(PreparedStatement stmt) throws SQLException {
+    private List<Citizen> getCitizenStatement(PreparedStatement stmt) throws SQLException {
         List<Citizen> result = new ArrayList<>();
         try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
@@ -116,7 +150,23 @@ public class CovidDao {
         }
         return result;
     }
-
+    private List<Vaccination> getVaccStatement(PreparedStatement stmt) throws SQLException {
+        List<Vaccination> result = new ArrayList<>();
+        try (ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Vaccination v = new Vaccination(
+                        rs.getLong(1),
+                        rs.getLong(2),
+                        rs.getTimestamp(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6)
+                );
+                result.add(v);
+            }
+        }
+        return result;
+    }
 
     public Map<String, String> mapPostcodes() {
         try (Connection conn = dataSource.getConnection();

@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CovidTest {
+class CovidFileTest {
 
     @Test
     void main() {

@@ -12,7 +12,7 @@ CREATE TABLE citizens (
 CREATE TABLE vaccinations (
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	citizen_id BIGINT NOT NULL,
-	vacc_date DATE NOT NULL,
+	vacc_date DATETIME NOT NULL,
 	status VARCHAR(10),
 	note VARCHAR(200),
 	vacc_type VARCHAR(20),

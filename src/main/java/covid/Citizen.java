@@ -34,8 +34,8 @@ public class Citizen {
         this.vaccLast = vaccLast;
     }
 
-    public void incVaccNumber() {
-        this.vaccNumber++;
+    public void setVaccNumber(int vaccNumber) {
+        this.vaccNumber = vaccNumber;
     }
 
     public Citizen(long id, String name, String postcode, int age, String email, String TAJnumber, int vaccNumber, Timestamp vaccLast) {
@@ -81,18 +81,6 @@ public class Citizen {
             throw new IllegalArgumentException("invalid TAJ");
         }
         return s;
-    }
-
-    @Override
-    public String toString() {
-        return "Citizen{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", postcode='" + postcode + '\'' +
-                ", age=" + age +
-                ", email='" + email + '\'' +
-                ", TAJnumber='" + TAJnumber + '\'' +
-                '}';
     }
 
     public void setId(long id) {
